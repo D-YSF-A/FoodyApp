@@ -20,9 +20,10 @@ To create database from the comand line (CLI) enter the following command:
 
 ```
 createdb foody
-```
+
+
 psql foody
-```
+
 
 CREATE TABLE "User"
 (
@@ -39,12 +40,12 @@ TABLESPACE pg_default;
 ALTER TABLE "User"
     OWNER to postgres;
 
-```
+
 INSERT INTO "User" (name,email) VALUES ('john','john@gmail.com');
-```
+
 SELECT * FROM "User";
-```
+
 \q
-```
+
 
 # FoodyApp
