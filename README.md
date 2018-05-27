@@ -79,3 +79,4 @@ To insert new row into table "User", run the following command:
 ```
 INSERT INTO public.User (name,email) VALUES ('john','john@gmail.com');
 ```
+# FoodyApp
