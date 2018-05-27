@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/rimzoni/cs412_Spring.git"
   },
-  "author": "Youssef Aly",
+  "author": "cs412 class",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rimzoni/cs412_Spring/issues"
@@ -25,6 +25,7 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",

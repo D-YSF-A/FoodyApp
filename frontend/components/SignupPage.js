@@ -96,7 +96,7 @@ class SignupPage extends Component {
       return (
         <Container>
         <AppHeader />
-         <Header as='h3'>User detail page: {this.state.user.name}</Header>
+         <Header as='h3'>User detail page for user: {this.state.user.name}</Header>
 
          <Form onSubmit={this.handleSubmit}>
           <Form.Field>

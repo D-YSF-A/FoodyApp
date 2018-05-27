@@ -11,28 +11,6 @@ function handleUserActions (state, action) {
         isFetching: false,
         users: userDataAll
       }
-    case 'REQUEST_USER_BY_ID':
-        return {
-          isFetching: true,
-          userDetails: {}
-      }
-    case 'RECEIVE_USER_BY_ID':
-        const userDetails = action.response.data
-        return {
-          isFetching: false,
-          userDetails: userDetails
-      }
-    case 'REQUEST_USER_REMOVE_BY_ID':
-          return {
-            isFetching: true,
-            userRemove: {}
-      }
-    case 'RECEIVE_USER_REMOVE_BY_ID':
-          const userRemove = action.response.data
-          return {
-            isFetching: false,
-            userRemove: userRemove
-      }
     default:
       return state
   }

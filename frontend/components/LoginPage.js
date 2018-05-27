@@ -4,9 +4,14 @@ import axios from 'axios'
 import AppHeader from './Header'
 import { Button, Form, Container, Header, Message } from 'semantic-ui-react'
 
+//added
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { userActions, loginActions } from '../actions'
+
 
 class LoginPage extends Component {
-  constructor () {
+  constructor (props) {
     super()
     this.state = {
       user: {
@@ -22,6 +27,7 @@ class LoginPage extends Component {
       errorEmail: '',
       errorPassword: ''
     }
+    this.props = props
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -49,10 +55,8 @@ class LoginPage extends Component {
 
     let hasErrors = this.validateFields(email,password)
     if(!hasErrors){
-      axios.get('http://localhost:3000/user/login?email='+email+'&password='+password, {
-        'email': email,
-        'password': password
-      }).then(response => this.setState({user: response.data}))
+      this.props.actions.checkLoginDetails(email, password)
+      .then(response => this.setState({user: response.data}))
   }
   }
   handleChange(event,field) {
@@ -83,15 +87,15 @@ class LoginPage extends Component {
   render () {
       return (
         <Container>
-        <AppHeader />
-        {(this.state.user.logged && this.state.user.error === '')&&
-         <Header as='h3'>Successfully logged in user with details : {`Name: ${this.state.user.name}, Email:${this.state.user.email} and user has token ${this.state.user.token}`}</Header>
+        <AppHeader user={this.props.loginProps.user} />
+        {(this.props.loginProps.user.logged && this.props.loginProps.user.error === '')&&
+         <Header as='h3'>Successfully logged in user with details : {`Name: ${this.props.loginProps.user.name}, Email:${this.props.loginProps.user.email} and user has token ${this.props.loginProps.user.token}`}</Header>
         }
-        {(this.state.user.error !== '') &&
+        {(this.props.loginProps.user.error !== '') &&
           <Message
           color='red'
             header="Login error"
-            content={`Error loggin in user with message : ${this.state.user.error}`}
+            content={`Error loggin in user with message : ${this.props.loginProps.user.error}`}
           />
         }
          <Form onSubmit={this.handleSubmit}>
@@ -127,4 +131,24 @@ class LoginPage extends Component {
      )
    }
  }
- export default LoginPage
+//  export default LoginPage
+//change
+function mapStateToProps (state) {
+  return {
+    user: state.user,
+    loginProps: state.loginProps
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(
+      Object.assign(
+        {},
+        userActions,
+        loginActions
+      ),
+      dispatch
+    )
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

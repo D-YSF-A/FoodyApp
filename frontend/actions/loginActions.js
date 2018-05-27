@@ -51,8 +51,8 @@ function checkLoginDetails (email, password) {
 
 function signOut () {
   return (dispatch, getState) => {
-      return dispatch({type: "USER_SIGN_OUT"})
-  }
+    return dispatch({ type: 'USER_SIGN_OUT' })
+    }
 }
 
 

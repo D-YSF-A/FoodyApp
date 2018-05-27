@@ -24,7 +24,7 @@ class UserGrid extends Component {
   }
 
   handleClick () {
-    this.props.actions.fetchUsers()
+    this.props.actions.fetchUsers()//.then(response => this.setState({users: response.data}))
     // axios.get('http://localhost:3000/users')
     //     .then(response => this.setState({users: response.data}))
     //     //.then(response => console.log(response))

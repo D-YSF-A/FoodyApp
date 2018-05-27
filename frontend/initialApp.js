@@ -20,24 +20,21 @@ let loginPropsCached = {
     user: cachedUser
    }
  }
-
 const initialAppState = {
   user: {
-    logged: false,
     isFetching: false,
-    users:[],
-    userDetails:{},
-    userRemove:{}
+    users:[]
   },
-
-  projectProps: {
+  restaurant: {
     isFetching: false,
-    viewProject: {}
+    restaurants:[]
   },
-
   loginProps: loginPropsCached,
+  item: {
+      isFetching: false,
+      items:[]
+  },
   errorMessage: null
-
 }
 
 const store = configureStore(initialAppState)

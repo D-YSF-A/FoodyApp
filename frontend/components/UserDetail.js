@@ -4,13 +4,9 @@ import axios from 'axios'
 import AppHeader from './Header'
 import { Button, Form, Container, Header, Message } from 'semantic-ui-react'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { userActions } from '../actions'
-
 
 class UserDetail extends Component {
-  constructor (props) {
+  constructor () {
     super()
     this.state = {
       user: {
@@ -22,9 +18,6 @@ class UserDetail extends Component {
       errorEmail: '',
       errorPassword: ''
     }
-    this.props = props
-    console.log(props)
-
     this.getUserById = this.getUserById.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -36,17 +29,15 @@ class UserDetail extends Component {
     }
   }
   getUserById (userId) {
-    this.props.actions.fetchUsersById(userId)
-    //axios.get('http://localhost:3000/userById?id='+userId)
-        //.then(response => this.setState({user: response.data}))
+    axios.get('http://localhost:3000/userById?id='+userId)
+        .then(response => this.setState({user: response.data}))
         //.then(response => console.log(response))
   }
   removeUserById (e,userId) {
     e.preventDefault()
   	e.stopPropagation()
-    this.props.actions.removeUsersById(userId)
-    //axios.get('http://localhost:3000/user/delete?id='+userId)
-        //.then(this.props.history.push('/users'))
+    axios.get('http://localhost:3000/user/delete?id='+userId)
+        .then(this.props.history.push('/users'))
   }
 
   validateFields(name, email, password){
@@ -133,7 +124,7 @@ class UserDetail extends Component {
       return (
         <Container>
         <AppHeader />
-         <Header as='h3'>User detail page for user: {this.props.userDetails.name}</Header>
+         <Header as='h3'>User detail page for user: {this.state.user.name}</Header>
 
          <Form onSubmit={this.handleSubmit}>
           <Form.Field>
@@ -176,22 +167,10 @@ class UserDetail extends Component {
           }
           </Form.Field>
           <Button primary type='submit'>Submit</Button>
-          <Button secondary className='button' onClick={(e) => this.removeUserById(e, this.props.userDetails.id)}>Remove user</Button>
+          <Button secondary className='button' onClick={(e) => this.removeUserById(e, this.state.user.id)}>Remove user</Button>
          </Form>
          </Container>
      )
    }
  }
- const mapStateToProps = ({user}) => user
- const mapDispatchToProps = dispatch => {
-   return {
-     actions: bindActionCreators(
-       Object.assign(
-         {},
-         userActions
-       ),
-       dispatch
-     )
-   }
- }
- export default connect(mapStateToProps, mapDispatchToProps)(UserDetail)
+ export default UserDetail
