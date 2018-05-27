@@ -1,26 +1,11 @@
-# Repository of the cs412 Spring 2018 course
+# Repository of the CS308 Spring 2018 project
 
-## Cheatsheets
 
-psql CLI cheatsheets:
-
-https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
-https://gist.github.com/apolloclark/ea5466d5929e63043dcf
-
-git CLI cheatsheet:
-
-https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf
-
-Linux BASH (Konsole) cheatsheet:
-
-https://learncodethehardway.org/unix/bash_cheat_sheet.pdf
 
 ## Database initial Setup
 
-To create the DB user (should already exist on the lab computers) run the following query on the psql (don't forget to enter real password instead of xxxxx):
-
 ```
-CREATE USER iuslab WITH
+CREATE USER postgres WITH
 	LOGIN
 	NOSUPERUSER
 	CREATEDB
@@ -34,25 +19,12 @@ CREATE USER iuslab WITH
 To create database from the comand line (CLI) enter the following command:
 
 ```
-createdb CS416_DB
+createdb foody
+```
+psql foody
 ```
 
-To connect psql to the database enter the following command:
-
-```
-psql cs416_db
-```
-
-To leave psql enter
-
-```
-\q
-```
-
-To create table "User" in the database enter the following command from psql:
-
-```
-CREATE TABLE public."User"
+CREATE TABLE "User"
 (
     id serial,
     name character varying,
@@ -64,19 +36,15 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public."User"
-    OWNER to iuslab;
-```
-
-To show records from User table run the following query in psql:
+ALTER TABLE "User"
+    OWNER to postgres;
 
 ```
-SELECT * FROM public.User;
+INSERT INTO "User" (name,email) VALUES ('john','john@gmail.com');
+```
+SELECT * FROM "User";
+```
+\q
 ```
 
-To insert new row into table "User", run the following command:
-
-```
-INSERT INTO public.User (name,email) VALUES ('john','john@gmail.com');
-```
 # FoodyApp
